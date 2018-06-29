@@ -12,6 +12,7 @@
 namespace PommProject\ApiPlatform;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
+use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use PommProject\Foundation\Pomm;
 
 class ItemDataProvider implements ItemDataProviderInterface
@@ -38,6 +39,10 @@ class ItemDataProvider implements ItemDataProviderInterface
             $modelName = $context['model:name'];
         } else {
             $modelName = "${resourceClass}Model";
+        }
+
+        if (!class_exists($modelName)) {
+                throw new ResourceClassNotSupportedException();
         }
 
         $model = $session->getModel($modelName);

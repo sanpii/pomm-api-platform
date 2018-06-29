@@ -12,6 +12,7 @@
 namespace PommProject\ApiPlatform;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
+use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use PommProject\Foundation\Pomm;
 use PommProject\Foundation\Where;
 use PommProject\ModelManager\Model\Model;
@@ -48,6 +49,10 @@ class CollectionDataProvider implements CollectionDataProviderInterface
         }
 
         $modelName = "${resourceClass}Model";
+        if (!class_exists($modelName)) {
+            throw new ResourceClassNotSupportedException();
+        }
+
         $session = $this->pomm->getDefaultSession();
         $model = $session->getModel($modelName);
         $paginator = $model->paginateFindWhere(
