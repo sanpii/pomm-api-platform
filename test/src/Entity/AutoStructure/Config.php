@@ -38,6 +38,7 @@ class Config extends RowStructure
             ->setPrimaryKey(['name'])
             ->addField('name', 'varchar')
             ->addField('value', 'varchar')
+            ->addField('status', 'int')
             ;
     }
 }

@@ -35,7 +35,8 @@ Feature: Pomm bridge for api platform
         """
         {
             "name": "<name>",
-            "value": "<value>"
+            "value": "<value>",
+            "status": 1
         }
         """
 
@@ -53,19 +54,23 @@ Feature: Pomm bridge for api platform
         [
             {
                 "name": "test1",
-                "value": "value1"
+                "value": "value1",
+                "status": 1
             },
             {
                 "name": "test2",
-                "value": "value2"
+                "value": "value2",
+                "status": 1
             },
             {
                 "name": "test3",
-                "value": "value3"
+                "value": "value3",
+                "status": 1
             },
             {
                 "name": "test4",
-                "value": "value4"
+                "value": "value4",
+                "status": 1
             }
         ]
         """
@@ -77,19 +82,23 @@ Feature: Pomm bridge for api platform
         [
             {
                 "name": "test4",
-                "value": "value4"
+                "value": "value4",
+                "status": 1
             },
             {
                 "name": "test3",
-                "value": "value3"
+                "value": "value3",
+                "status": 1
             },
             {
                 "name": "test2",
-                "value": "value2"
+                "value": "value2",
+                "status": 1
             },
             {
                 "name": "test1",
-                "value": "value1"
+                "value": "value1",
+                "status": 1
             }
         ]
         """
@@ -100,7 +109,8 @@ Feature: Pomm bridge for api platform
         """
         {
             "name": "test1",
-            "value": "new_value"
+            "value": "new_value",
+            "status": 1
         }
         """
         Then the response status code should be 200
@@ -108,7 +118,8 @@ Feature: Pomm bridge for api platform
         """
         {
             "name": "test1",
-            "value": "new_value"
+            "value": "new_value",
+            "status": 1
         }
         """
 
@@ -118,7 +129,8 @@ Feature: Pomm bridge for api platform
         """
         {
             "name": "test1",
-            "value": "new_value"
+            "value": "new_value",
+            "status": 1
         }
         """
 
@@ -129,7 +141,8 @@ Feature: Pomm bridge for api platform
         [
             {
                 "name": "test1",
-                "value": "new_value"
+                "value": "new_value",
+                "status": 1
             }
         ]
         """
