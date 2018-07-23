@@ -11,6 +11,7 @@
 
 namespace PommProject\ApiPlatform;
 
+use ApiPlatform\Core\Exception\ItemNotFoundException;
 use PommProject\Foundation\Pomm;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseForControllerResultEvent;
@@ -32,21 +33,33 @@ final class WriteListener
         }
 
         $model = $this->getModel($request);
+        if (null === $model) {
+            return;
+        }
+
         $entity = $event->getControllerResult();
 
+        $action_handled = false;
         switch ($request->getMethod()) {
             case Request::METHOD_POST:
                 $model->insertOne($entity);
+                $action_handled = true;
                 break;
 
             case Request::METHOD_PUT:
                 $fields = array_keys($entity->fields());
                 $model->updateOne($entity, $fields);
+                $action_handled = true;
                 break;
 
             case Request::METHOD_DELETE:
                 $model->deleteOne($entity);
+                $action_handled = true;
                 break;
+        }
+
+        if ($action_handled) {
+            $this->setResult($event, $entity);
         }
     }
 
@@ -71,4 +84,22 @@ final class WriteListener
 
         return $session->getModel($modelName);
     }
+
+    /**
+     * setResult
+     *
+     * @param GetResponseForControllerResultEvent                 $event
+     * @param \PommProject\ModelManager\Model\FlexibleEntity|null $entity
+     * @return WriteListener
+     */
+    private function setResult(GetResponseForControllerResultEvent $event, $entity): self
+    {
+        if (null === $entity) {
+            throw new ItemNotFoundException();
+        }
+
+        $event->setControllerResult($entity);
+
+        return $this;
+     }
 }
