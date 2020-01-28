@@ -3,10 +3,13 @@ language: php
 sudo: false
 
 php:
-    - "7.0"
     - "7.1"
     - "7.2"
     - "nightly"
+
+env:
+    global:
+        - COMPOSER_MEMORY_LIMIT=-1
 
 matrix:
     allow_failures:
@@ -30,7 +33,7 @@ before_install:
 install:
     - composer install
     - cd test/
-    - composer install
+    - composer update
     - rm -rf vendor/pomm-project/api-platform
     - ln -s ../../../ vendor/pomm-project/api-platform
 

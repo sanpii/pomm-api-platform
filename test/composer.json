@@ -2,14 +2,15 @@
     "require": {
         "php": ">=7.0",
         "api-platform/core": "~2.0",
-        "symfony/symfony": "~3.0",
-        "symfony/assetic-bundle": "~2.7",
-        "symfony/monolog-bundle": "~3.0",
+        "symfony/symfony": "~4.0",
+        "symfony/asset": "^3.4||^4.0",
+        "symfony/monolog-bundle": "~3.4||~4.0",
         "pomm-project/pomm-bundle": "~2.4",
         "pomm-project/api-platform": "dev-master"
     },
     "require-dev": {
-        "behatch/contexts": "~2.6",
+        "behat/mink": "dev-master",
+        "behatch/contexts": "^3.2",
         "behat/mink-goutte-driver": "*"
     },
     "autoload": {

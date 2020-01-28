@@ -31,11 +31,24 @@ services:
     tags:
       - { name: 'api_platform.item_data_provider' }
 
-  api_platform.pomm.listener.view.write:
-    class: 'PommProject\ApiPlatform\WriteListener'
+  api_platform.pomm.item_data_persister:
+    class: 'PommProject\ApiPlatform\ItemDataPersister'
     arguments: ['@pomm']
     tags:
-      - { name: 'kernel.event_listener', event: 'kernel.view', method: 'onKernelView', priority: 32 }
+      - { name: 'api_platform.data_persister' }
+
+  api_platform.pomm.property_metadata:
+    class: 'PommProject\ApiPlatform\Metadata\Property\PommPropertyMetadataFactory'
+    arguments: ['@pomm', '@api_platform.pomm.property_metadata.inner']
+    decorates: 'api_platform.metadata.property.metadata_factory'
+    decoration_priority: 39
+    public: false
+
+  #api_platform.pomm.listener.view.write:
+    #  class: 'PommProject\ApiPlatform\WriteListener'
+    #arguments: ['@pomm']
+      #tags:
+    #- { name: 'kernel.event_listener', event: 'kernel.view', method: 'onKernelView', priority: 32 }
 
   api_platform.pomm.search_filter:
     public: false

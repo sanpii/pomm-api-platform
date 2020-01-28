@@ -22,7 +22,6 @@ class AppKernel extends Kernel
     {
         $bundles = [
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
             new \PommProject\PommBundle\PommBundle(),

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use PommProject\ModelManager\Model\FlexibleEntity;
 
 /**
@@ -11,6 +12,9 @@ use PommProject\ModelManager\Model\FlexibleEntity;
  * public.config
  *
  * @see FlexibleEntity
+ *
+ * @ApiResource
+ *
  */
 class Config extends FlexibleEntity
 {

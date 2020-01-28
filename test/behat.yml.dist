@@ -1,7 +1,8 @@
 default:
     suites:
         default:
-            paths: [ %paths.base%/tests/Features ]
+            paths:
+                - '%paths.base%/tests/Features'
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
                 - behatch:context:json

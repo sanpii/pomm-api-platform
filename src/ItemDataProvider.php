@@ -12,16 +12,26 @@
 namespace PommProject\ApiPlatform;
 
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
+use ApiPlatform\Core\DataProvider\RestrictedDataProviderInterface;
 use ApiPlatform\Core\Exception\ResourceClassNotSupportedException;
 use PommProject\Foundation\Pomm;
+use PommProject\ModelManager\Model\FlexibleEntity\FlexibleEntityInterface;
+use ReflectionClass;
 
-class ItemDataProvider implements ItemDataProviderInterface
+class ItemDataProvider implements ItemDataProviderInterface, RestrictedDataProviderInterface
 {
     private $pomm;
 
     public function __construct(Pomm $pomm)
     {
         $this->pomm = $pomm;
+    }
+
+    public function supports(string $resourceClass, string $operationName = null, array $context = []): bool
+    {
+        $proxyClass = new ReflectionClass($resourceClass);
+
+        return $proxyClass->implementsInterface(FlexibleEntityInterface::class);
     }
 
     /**
